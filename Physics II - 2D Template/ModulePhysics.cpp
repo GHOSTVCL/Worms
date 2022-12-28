@@ -25,7 +25,14 @@ bool ModulePhysics::Start()
 	ground.x = 0.0f; // [m]
 	ground.y = 0.0f; // [m]
 	ground.w = 30.0f; // [m]
-	ground.h = 5.0f; // [m]
+	ground.h = 8.0f; // [m]
+
+	terra = Ground();
+	terra.x = 25.0f; // [m]
+	terra.y = 25.0f; // [m]
+	terra.w = 30.0f; // [m]
+	terra.h = 8.0f; // [m]
+
 
 	// Create Water
 	water = Water();
@@ -59,11 +66,20 @@ bool ModulePhysics::Start()
 	// Set initial position and velocity of the ball
 	ball.x = 2.0f;
 	ball.y = (ground.y + ground.h) + 2.0f;
-	ball.vx = 5.0f;
-	ball.vy = 10.0f;
+	ball.vx = 2.f;
+	ball.vy = 2.f;
 
 	// Add ball to the collection
 	balls.emplace_back(ball);
+
+	PhysRect player = PhysRect();
+
+	player.x = 5.0f;
+	player.y = 10.0f;
+	player.w = 1.0f;
+	player.h = 2.0f;
+
+	players.emplace_back(player);
 
 	return true;
 }
@@ -148,6 +164,18 @@ update_status ModulePhysics::PreUpdate()
 			ball.vx *= ball.coef_friction;
 			ball.vy *= ball.coef_restitution;
 		}
+		if (is_colliding_with_ground(ball, terra))
+		{
+			// TP ball to ground surface
+			ball.y = terra.y + terra.h + ball.radius;
+
+			// Elastic bounce with ground
+			ball.vy = -ball.vy;
+
+			// FUYM non-elasticity
+			ball.vx *= ball.coef_friction;
+			ball.vy *= ball.coef_restitution;
+		}
 	}
 
 	// Continue game
@@ -162,6 +190,10 @@ update_status ModulePhysics::PostUpdate()
 	// Draw ground
 	color_r = 0; color_g = 255; color_b = 0;
 	App->renderer->DrawQuad(ground.pixels(), color_r, color_g, color_b);
+
+	// Draw Terra
+	color_r = 0; color_g = 255; color_b = 0;
+	App->renderer->DrawQuad(terra.pixels(), color_r, color_g, color_b);
 
 	// Draw water
 	color_r = 0; color_g = 0; color_b = 255;
@@ -188,7 +220,27 @@ update_status ModulePhysics::PostUpdate()
 		// Draw ball
 		App->renderer->DrawCircle(pos_x, pos_y, size_r, color_r, color_g, color_b);
 	}
+	for (auto& player : players)
+	{
+		// Convert from physical magnitudes to geometrical pixels
+		int pos_x = METERS_TO_PIXELS(player.x);
+		int pos_y = SCREEN_HEIGHT - METERS_TO_PIXELS(player.y);
+		int size_w = METERS_TO_PIXELS(player.w);
+		int size_h = METERS_TO_PIXELS(player.h);
 
+		// Select color
+		if (player.physics_enabled)
+		{
+			color_r = 255; color_g = 255; color_b = 255;
+		}
+		else
+		{
+			color_r = 255; color_g = 0; color_b = 0;
+		}
+
+		// Draw ball
+		App->renderer->DrawQuad({ pos_x, pos_y, size_w, size_h }, color_r, color_g, color_b);
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -302,4 +354,12 @@ SDL_Rect Ground::pixels()
 	return pos_px;
 }
 
-
+SDL_Rect PhysRect::pixels()
+{
+	SDL_Rect pos_px{};
+	pos_px.x = METERS_TO_PIXELS(x);
+	pos_px.y = SCREEN_HEIGHT - METERS_TO_PIXELS(y);
+	pos_px.w = METERS_TO_PIXELS(w);
+	pos_px.h = METERS_TO_PIXELS(-h); // Can I do this? LOL
+	return pos_px;
+}
