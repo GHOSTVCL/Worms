@@ -48,8 +48,14 @@ public:
 	// Shape
 	float radius;
 
+	float fvecx;
+	float fvecy;
+
 	// Has physics enabled?
 	bool physics_enabled = true;
+	bool shot;
+	bool onair;
+	bool canshoot;
 };
 
 

@@ -33,7 +33,10 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 
-	
+	if (App->physics->balls.at(0).shot == false) {
+		App->physics->balls.at(0).x = App->physics->players.at(0).x+1;
+		App->physics->balls.at(0).y = App->physics->players.at(0).y+1;
+	}
 	
 	return UPDATE_CONTINUE;
 }
