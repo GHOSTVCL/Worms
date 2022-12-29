@@ -325,23 +325,23 @@ update_status ModulePhysics::PreUpdate()
 update_status ModulePhysics::PostUpdate()
 {
 	// Colors
-	int color_r, color_g, color_b;
+	int color_r, color_g, color_b, alpha_a;
 
 	// Draw Ground
-	color_r = 0; color_g = 255; color_b = 0;
-	App->renderer->DrawQuad(ground.pixels(), color_r, color_g, color_b);
+	color_r = 0; color_g = 255; color_b = 0, alpha_a = 0;
+	App->renderer->DrawQuad(ground.pixels(), color_r, color_g, color_b, alpha_a);
 
 	// Draw Ground 2
-	color_r = 0; color_g = 255; color_b = 0;
-	App->renderer->DrawQuad(ground_2.pixels(), color_r, color_g, color_b);
+	color_r = 0; color_g = 255; color_b = 0, alpha_a = 0;
+	App->renderer->DrawQuad(ground_2.pixels(), color_r, color_g, color_b, alpha_a);
 
 	// Draw Platform
-	color_r = 0; color_g = 255; color_b = 0;
-	App->renderer->DrawQuad(platform.pixels(), color_r, color_g, color_b);
+	color_r = 0; color_g = 255; color_b = 0, alpha_a = 0;
+	App->renderer->DrawQuad(platform.pixels(), color_r, color_g, color_b, alpha_a);
 
 	// Draw water
-	color_r = 0; color_g = 0; color_b = 255;
-	App->renderer->DrawQuad(water.pixels(), color_r, color_g, color_b);
+	color_r = 0; color_g = 0; color_b = 255, alpha_a = 0;
+	App->renderer->DrawQuad(water.pixels(), color_r, color_g, color_b, alpha_a);
 
 	// Draw all balls in the scenario
 	for (auto& ball : balls)
