@@ -33,14 +33,7 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-	{
-		App->physics->player.fx = 1.0f;
-	}
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
-	{
-		App->physics->player.fx = 0.0f;
-	}
+	
 	
 	return UPDATE_CONTINUE;
 }

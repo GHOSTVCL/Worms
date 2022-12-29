@@ -237,7 +237,18 @@ update_status ModulePhysics::PreUpdate()
 
 		// Step #2: 2nd Newton's Law
 		// ----------------------------------------------------------------------------------------
-
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			player.vx = 5.0f;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			player.vx = -5.0f;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE && App->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE)
+		{
+			player.vx = 0.0f;
+		}
 		// SUM_Forces = mass * accel --> accel = SUM_Forces / mass
 		player.ax = player.fx / player.mass;
 		player.ay = player.fy / player.mass;
