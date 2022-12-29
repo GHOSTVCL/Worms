@@ -52,47 +52,7 @@ public:
 	bool physics_enabled = true;
 };
 
-class PhysRect
-{
-public:
-	// Position
-	// You could also use an array/vector
-	float x;
-	float y;
 
-	// Velocity
-	float vx;
-	float vy;
-
-	// Acceleration
-	float ax;
-	float ay;
-
-	// Force (total) applied to the ball
-	float fx;
-	float fy;
-
-	// Mass
-	float mass;
-
-	// Aerodynamics stuff
-	float surface; // Effective wet surface
-	float cl; // Aerodynamic Lift coefficient
-	float cd; // Aerodynamic Drag coefficient
-	float b; // Hydrodynamic Drag coefficient
-
-	// Coefficients of friction & restitution (for bounces)
-	float coef_friction;
-	float coef_restitution;
-
-	// Shape
-	float w, h;
-
-	// Has physics enabled?
-	bool physics_enabled = true;
-
-	SDL_Rect pixels();
-};
 // Class: Ground
 class Ground : public SDL_Rect
 {
@@ -134,11 +94,13 @@ public:
 
 	// Physics objects
 	std::vector<PhysBall> balls{};
-	std::vector<PhysRect> players{};
+	std::vector<PhysBall> players{};
 	Atmosphere atmosphere{};
 	Ground ground{};
 	Ground terra{};
 	Water water{};
+
+	PhysBall player = PhysBall();
 
 	// Misc
 	float dt = 1.0 / 60.0;

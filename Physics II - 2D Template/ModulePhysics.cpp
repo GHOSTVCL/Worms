@@ -72,12 +72,22 @@ bool ModulePhysics::Start()
 	// Add ball to the collection
 	balls.emplace_back(ball);
 
-	PhysRect player = PhysRect();
+	
+	player.mass = 10.0f; // [kg]
+	player.surface = 1.0f; // [m^2]
+	player.radius = 0.8f; // [m]
+	player.cd = 0.1f; // [-]
+	player.cl = 0.1f; // [-]
+	player.b = 0.1f; // [...]
+	player.coef_friction = 0.9f; // [-]
+	player.coef_restitution = 0.8f; // [-]
+	player.fx = 1.0f;
 
-	player.x = 5.0f;
-	player.y = 10.0f;
-	player.w = 1.0f;
-	player.h = 2.0f;
+	// Set initial position and velocity of the ball
+	player.x = 2.0f;
+	player.y = (ground.y + ground.h) + 0.8f;
+	player.vx = 0.1f;
+	player.vy = 0.0f;
 
 	players.emplace_back(player);
 
@@ -177,7 +187,96 @@ update_status ModulePhysics::PreUpdate()
 			ball.vy *= ball.coef_restitution;
 		}
 	}
+	for (auto& player : players)
+	{
+		// Skip ball if physics not enabled
+		if (!player.physics_enabled)
+		{
+			continue;
+		}
 
+		// Step #0: Clear old values
+		// ----------------------------------------------------------------------------------------
+
+		// Reset total acceleration and total accumulated force of the ball
+		player.fx = player.fy = 0.0f;
+		player.ax = player.ay = 0.0f;
+
+		// Step #1: Compute forces
+		// ----------------------------------------------------------------------------------------
+
+		// Gravity force
+		float fgx = player.mass * 0.0f;
+		float fgy = player.mass * -10.0f; // Let's assume gravity is constant and downwards
+		player.fx += fgx; player.fy += fgy; // Add this force to ball's total force
+
+		// Aerodynamic Drag force (only when not in water)
+		if (!is_colliding_with_water(player, water))
+		{
+			float fdx = 0.0f; float fdy = 0.0f;
+			compute_aerodynamic_drag(fdx, fdy, player, atmosphere);
+			player.fx += fdx; player.fy += fdy; // Add this force to ball's total force
+		}
+
+		// Hydrodynamic forces (only when in water)
+		if (is_colliding_with_water(player, water))
+		{
+			// Hydrodynamic Drag force
+			float fhdx = 0.0f; float fhdy = 0.0f;
+			compute_hydrodynamic_drag(fhdx, fhdy, player, water);
+			player.fx += fhdx; player.fy += fhdy; // Add this force to ball's total force
+
+			// Hydrodynamic Buoyancy force
+			float fhbx = 0.0f; float fhby = 0.0f;
+			compute_hydrodynamic_buoyancy(fhbx, fhby, player, water);
+			player.fx += fhbx; player.fy += fhby; // Add this force to ball's total force
+		}
+
+		// Other forces
+		// ...
+
+		// Step #2: 2nd Newton's Law
+		// ----------------------------------------------------------------------------------------
+
+		// SUM_Forces = mass * accel --> accel = SUM_Forces / mass
+		player.ax = player.fx / player.mass;
+		player.ay = player.fy / player.mass;
+
+		// Step #3: Integrate --> from accel to new velocity & new position
+		// ----------------------------------------------------------------------------------------
+
+		// We will use the 2nd order "Velocity Verlet" method for integration.
+		integrator_velocity_verlet(player, dt);
+
+		// Step #4: solve collisions
+		// ----------------------------------------------------------------------------------------
+
+		// Solve collision between ball and ground
+		if (is_colliding_with_ground(player, ground))
+		{
+			// TP ball to ground surface
+			player.y = ground.y + ground.h + player.radius;
+
+			// Elastic bounce with ground
+			player.vy = -player.vy;
+
+			// FUYM non-elasticity
+			player.vx *= player.coef_friction;
+			player.vy *= player.coef_restitution;
+		}
+		if (is_colliding_with_ground(player, terra))
+		{
+			// TP ball to ground surface
+			player.y = terra.y + terra.h + player.radius;
+
+			// Elastic bounce with ground
+			player.vy = -player.vy;
+
+			// FUYM non-elasticity
+			player.vx *= player.coef_friction;
+			player.vy *= player.coef_restitution;
+		}
+	}
 	// Continue game
 	return UPDATE_CONTINUE;
 }
@@ -225,8 +324,8 @@ update_status ModulePhysics::PostUpdate()
 		// Convert from physical magnitudes to geometrical pixels
 		int pos_x = METERS_TO_PIXELS(player.x);
 		int pos_y = SCREEN_HEIGHT - METERS_TO_PIXELS(player.y);
-		int size_w = METERS_TO_PIXELS(player.w);
-		int size_h = METERS_TO_PIXELS(player.h);
+		int size_r = METERS_TO_PIXELS(player.radius);
+		
 
 		// Select color
 		if (player.physics_enabled)
@@ -238,8 +337,8 @@ update_status ModulePhysics::PostUpdate()
 			color_r = 255; color_g = 0; color_b = 0;
 		}
 
-		// Draw ball
-		App->renderer->DrawQuad({ pos_x, pos_y, size_w, size_h }, color_r, color_g, color_b);
+		// Draw player
+		App->renderer->DrawCircle(pos_x, pos_y, size_r, color_r, color_g, color_b);
 	}
 	return UPDATE_CONTINUE;
 }
@@ -354,12 +453,3 @@ SDL_Rect Ground::pixels()
 	return pos_px;
 }
 
-SDL_Rect PhysRect::pixels()
-{
-	SDL_Rect pos_px{};
-	pos_px.x = METERS_TO_PIXELS(x);
-	pos_px.y = SCREEN_HEIGHT - METERS_TO_PIXELS(y);
-	pos_px.w = METERS_TO_PIXELS(w);
-	pos_px.h = METERS_TO_PIXELS(-h); // Can I do this? LOL
-	return pos_px;
-}
