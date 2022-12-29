@@ -97,7 +97,8 @@ public:
 	std::vector<PhysBall> players{};
 	Atmosphere atmosphere{};
 	Ground ground{};
-	Ground terra{};
+	Ground ground_2{};
+	Ground platform{};
 	Water water{};
 
 	PhysBall player = PhysBall();
