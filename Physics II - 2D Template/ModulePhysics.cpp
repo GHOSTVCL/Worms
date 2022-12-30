@@ -246,7 +246,7 @@ update_status ModulePhysics::PreUpdate()
 		if (is_colliding_with_ground(player, platform))
 		{
 			// TP ball to ground surface
-			if (player.y > platform.y+platform.h) {
+			if (player.y > platform.y + platform.h) {
 				player.y = platform.y + platform.h + player.radius;
 				player.vy = -player.vy;
 
@@ -259,11 +259,11 @@ update_status ModulePhysics::PreUpdate()
 			}
 			if (player.x<platform.x)
 			{
-				player.x = platform.x- player.radius;
+				player.x = platform.x - player.radius;
 				player.vx = -player.vx+3;
 
 			}
-			if (player.x - player.radius > platform.x+platform.w)
+			if (player.x - player.radius > platform.x + platform.w)
 			{
 				player.x = platform.x + platform.w + player.radius;
 				player.vx = -player.vx + 3;
@@ -332,7 +332,7 @@ update_status ModulePhysics::PreUpdate()
 		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_IDLE && ball.canshoot == true) {
 
 			ball.vx = ball.fvecx / 7;
-			ball.vy = ball.fvecy / 7;
+			ball.vy = -ball.fvecy / 7;
 			ball.shot = true;
 			ball.canshoot = false;
 
