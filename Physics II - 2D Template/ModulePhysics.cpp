@@ -89,7 +89,7 @@ bool ModulePhysics::Start()
 	player.cl = 0.1f; // [-]
 	player.b = 0.1f; // [...]
 	player.coef_friction = 0.9f; // [-]
-	player.coef_restitution = 0.8f; // [-]
+	player.coef_restitution = 0.5f; // [-]
 	player.fx = 1.0f;
 
 	// Set initial position and velocity of the ball
@@ -189,59 +189,62 @@ update_status ModulePhysics::PreUpdate()
 			if (player.y > ground.y + ground.h) {
 				player.y = ground.y + ground.h + player.radius;
 				player.vy = -player.vy;
+				player.vy *= player.coef_restitution;
 
 			}
 			if (player.y < ground.y) {
 
 				player.y = ground.y - player.radius;
 				player.vy = -player.vy;
+				player.vy *= player.coef_restitution;
 
 			}
 			if (player.x < ground.x)
 			{
 				player.x = ground.x - player.radius;
 				player.vx = -player.vx + 3;
+				player.vx *= player.coef_friction;
 
 			}
-			if (player.x + player.radius >  ground.x + ground.w && player.y > ground.y + ground.h)
+			if ((player.x + 0.5 - player.radius)  >  (ground.x + ground.w) && player.y < ground.y + ground.h)
 			{
 				player.x = ground.x + ground.w + player.radius;
 				player.vx = -player.vx + 3;
+				player.vx *= player.coef_friction;
 
 			}
 
 			// FUYM non-elasticity
-			player.vx *= player.coef_friction;
-			player.vy *= player.coef_restitution;
 		}
 		if (is_colliding_with_ground(player, ground_2))
 		{
 			if (player.y > ground_2.y + ground_2.h) {
 				player.y = ground_2.y + ground_2.h + player.radius;
 				player.vy = -player.vy;
+				player.vy *= player.coef_restitution;
 
 			}
 			if (player.y < ground_2.y) {
 
 				player.y = ground_2.y - player.radius;
 				player.vy = -player.vy;
+				player.vy *= player.coef_restitution;
 
 			}
 			if (player.x < ground_2.x)
 			{
 				player.x = ground_2.x - player.radius;
 				player.vx = -player.vx + 3;
+				player.vx *= player.coef_friction;
 
 			}
-			if (player.x + player.radius > ground_2.x + ground_2.w)
+			if ((player.x + 0.5 - player.radius) > (ground_2.x + ground_2.w) && player.y < ground_2.y + ground_2.h)
 			{
 				player.x = ground_2.x + ground_2.w + player.radius;
 				player.vx = -player.vx + 3;
+				player.vx *= player.coef_friction;
 
 			}
-			// FUYM non-elasticity
-			player.vx *= player.coef_friction;
-			player.vy *= player.coef_restitution;
 		}
 		if (is_colliding_with_ground(player, platform))
 		{
@@ -249,32 +252,30 @@ update_status ModulePhysics::PreUpdate()
 			if (player.y > platform.y + platform.h) {
 				player.y = platform.y + platform.h + player.radius;
 				player.vy = -player.vy;
+				player.vy *= player.coef_restitution;
 
 			}
 			if (player.y < platform.y) {
 
 				player.y = platform.y - player.radius;
 				player.vy = -player.vy;
+				player.vy *= player.coef_restitution;
 
 			}
-			if (player.x<platform.x)
+			if (player.x - player.radius < platform.x && player.y < platform.y + platform.h)
 			{
 				player.x = platform.x - player.radius;
-				player.vx = -player.vx+3;
+				player.vx = -player.vx + 3;
+				player.vx *= player.coef_friction;
 
 			}
-			if (player.x - player.radius > platform.x + platform.w)
+			if ((player.x + 0.5 - player.radius) > (platform.x + platform.w) && player.y < platform.y + platform.h)
 			{
 				player.x = platform.x + platform.w + player.radius;
 				player.vx = -player.vx + 3;
+				player.vx *= player.coef_friction;
 
 			}
-
-			// Elastic bounce with ground
-
-			// FUYM non-elasticity
-			player.vx *= player.coef_friction;
-			player.vy *= player.coef_restitution;
 		}
 	}
 	for (auto& ball : balls)
@@ -353,39 +354,96 @@ update_status ModulePhysics::PreUpdate()
 		// Solve collision between ball and ground
 		if (is_colliding_with_ground(ball, ground))
 		{
-			// TP ball to ground surface
-			ball.y = ground.y + ground.h + ball.radius;
+			if (ball.y > ground.y + ground.h) {
+				ball.y = ground.y + ground.h + ball.radius;
+				ball.vy = -ball.vy;
+				ball.vy *= ball.coef_restitution;
 
-			// Elastic bounce with ground
-			ball.vy = -ball.vy;
+			}
+			if (ball.y < ground.y) {
+
+				ball.y = ground.y - ball.radius;
+				ball.vy = -ball.vy;
+				ball.vy *= ball.coef_restitution;
+
+			}
+			if (ball.x < ground.x)
+			{
+				ball.x = ground.x - ball.radius;
+				ball.vx = -ball.vx + 3;
+				ball.vx *= ball.coef_friction;
+
+			}
+			if ((ball.x + 0.5 - ball.radius) > (ground.x + ground.w) && ball.y < ground.y + ground.h)
+			{
+				ball.x = ground.x + ground.w + ball.radius;
+				ball.vx = -ball.vx + 3;
+				ball.vx *= ball.coef_friction;
+
+			}
 
 			// FUYM non-elasticity
-			ball.vx *= ball.coef_friction;
-			ball.vy *= ball.coef_restitution;
 		}
 		if (is_colliding_with_ground(ball, ground_2))
 		{
-			// TP ball to ground surface
-			ball.y = ground_2.y + ground_2.h + ball.radius;
+			if (ball.y > ground_2.y + ground_2.h) {
+				ball.y = ground_2.y + ground_2.h + ball.radius;
+				ball.vy = -ball.vy;
+				ball.vy *= ball.coef_restitution;
 
-			// Elastic bounce with ground
-			ball.vy = -ball.vy;
+			}
+			if (ball.y < ground_2.y) {
 
-			// FUYM non-elasticity
-			ball.vx *= ball.coef_friction;
-			ball.vy *= ball.coef_restitution;
+				ball.y = ground_2.y - ball.radius;
+				ball.vy = -ball.vy;
+				ball.vy *= ball.coef_restitution;
+
+			}
+			if (ball.x < ground_2.x)
+			{
+				ball.x = ground_2.x - ball.radius;
+				ball.vx = -ball.vx + 3;
+				ball.vx *= ball.coef_friction;
+
+			}
+			if ((ball.x + 0.5 - ball.radius) > (ground_2.x + ground_2.w) && ball.y < ground_2.y + ground_2.h)
+			{
+				ball.x = ground_2.x + ground_2.w + ball.radius;
+				ball.vx = -ball.vx + 3;
+				ball.vx *= ball.coef_friction;
+
+			}
 		}
 		if (is_colliding_with_ground(ball, platform))
 		{
 			// TP ball to ground surface
-			ball.y = platform.y + platform.h + ball.radius;
+			if (ball.y > platform.y + platform.h) {
+				ball.y = platform.y + platform.h + ball.radius;
+				ball.vy = -ball.vy;
+				ball.vy *= ball.coef_restitution;
 
-			// Elastic bounce with ground
-			ball.vy = -ball.vy;
+			}
+			if (ball.y < platform.y) {
 
-			// FUYM non-elasticity
-			ball.vx *= ball.coef_friction;
-			ball.vy *= ball.coef_restitution;
+				ball.y = platform.y - ball.radius;
+				ball.vy = -ball.vy;
+				ball.vy *= ball.coef_restitution;
+
+			}
+			if (ball.x - ball.radius < platform.x && ball.y < platform.y + platform.h)
+			{
+				ball.x = platform.x - ball.radius;
+				ball.vx = -ball.vx + 3;
+				ball.vx *= ball.coef_friction;
+
+			}
+			if ((ball.x + 0.5 - ball.radius) > (platform.x + platform.w) && ball.y < platform.y + platform.h)
+			{
+				ball.x = platform.x + platform.w + ball.radius;
+				ball.vx = -ball.vx + 3;
+				ball.vx *= player.coef_friction;
+
+			}
 		}
 
 	}
