@@ -105,7 +105,10 @@ public:
 	Ground ground{};
 	Ground ground_2{};
 	Ground platform{};
+	Ground basket{};
 	Water water{};
+
+	uint ScoreFX;
 
 	PhysBall player = PhysBall();
 

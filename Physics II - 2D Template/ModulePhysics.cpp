@@ -20,6 +20,8 @@ bool ModulePhysics::Start()
 {
 	LOG("Creating Physics 2D environment");
 
+	ScoreFX = App->audio->LoadFx("Assets/Audios/Score.wav");
+
 	// Create ground
 	ground = Ground();
 	ground.x = 0.0f; // [m]
@@ -38,6 +40,13 @@ bool ModulePhysics::Start()
 	platform.y = 9.0f; // [m]
 	platform.w = 15.0f; // [m]
 	platform.h = 2.0f; // [m]
+
+	basket = Ground();
+	basket.x = 13.0f; // [m]
+	basket.y = 22.0f; // [m]
+	basket.w = 1.0f; // [m]
+	basket.h = 2.5f; // [m]
+
 
 
 	// Create Water
@@ -445,7 +454,11 @@ update_status ModulePhysics::PreUpdate()
 
 			}
 		}
-
+		if (is_colliding_with_ground(ball, basket))
+		{
+			App->player->score = true;
+			App->audio->PlayFx(ScoreFX);
+		}
 	}
 	// Continue game
 	return UPDATE_CONTINUE;
@@ -467,6 +480,10 @@ update_status ModulePhysics::PostUpdate()
 	// Draw Platform
 	color_r = 0; color_g = 255; color_b = 0, alpha_a = 0;
 	App->renderer->DrawQuad(platform.pixels(), color_r, color_g, color_b, alpha_a);
+
+	// Draw Basket
+	color_r = 255; color_g = 0; color_b = 0, alpha_a = 255;
+	App->renderer->DrawQuad(basket.pixels(), color_r, color_g, color_b, alpha_a);
 
 	// Draw water
 	color_r = 0; color_g = 0; color_b = 255, alpha_a = 0;

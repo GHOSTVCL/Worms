@@ -16,7 +16,10 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 
+	
 
+	score = false;
+	
 	LOG("Loading player");
 	return true;
 }
@@ -38,6 +41,13 @@ update_status ModulePlayer::Update()
 		App->physics->balls.at(0).y = App->physics->players.at(0).y+1;
 	}
 	
+	if (score == true)
+	{
+		App->physics->balls.at(0).x = 100;
+		App->physics->balls.at(0).y = 100;
+		
+	}
+
 	return UPDATE_CONTINUE;
 }
 
