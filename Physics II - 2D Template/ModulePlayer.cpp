@@ -17,13 +17,10 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 
-<<<<<<< Updated upstream
 	
 	wintimer = -1;
-=======
 	balltex = App->textures->Load("Assets/ball.png");
 
->>>>>>> Stashed changes
 	score = false;
 	win = false;
 	LOG("Loading player");

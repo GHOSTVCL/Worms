@@ -21,12 +21,12 @@ public:
 public:
 
 	bool score;
-<<<<<<< Updated upstream
+
 	bool win;
 	int wintimer;
-=======
+
 	SDL_Texture* balltex = nullptr;
->>>>>>> Stashed changes
+
 	
 	
 };
