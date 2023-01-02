@@ -17,9 +17,9 @@ bool ModulePlayer::Start()
 {
 
 	
-
+	wintimer = -1;
 	score = false;
-	
+	win = false;
 	LOG("Loading player");
 	return true;
 }
@@ -43,11 +43,15 @@ update_status ModulePlayer::Update()
 	
 	if (score == true)
 	{
+		wintimer = 800;
 		App->physics->balls.at(0).x = 100;
 		App->physics->balls.at(0).y = 100;
 		
 	}
-
+	if (wintimer == 0) {
+		win = true;
+	}
+	wintimer--;
 	return UPDATE_CONTINUE;
 }
 

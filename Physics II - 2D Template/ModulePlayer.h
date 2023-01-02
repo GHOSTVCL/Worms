@@ -20,7 +20,8 @@ public:
 public:
 
 	bool score;
-
+	bool win;
+	int wintimer;
 	
 	
 };
