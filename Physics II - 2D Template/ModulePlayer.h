@@ -6,6 +6,7 @@
 #include "ModulePhysics.h"
 #include "ModuleRender.h"
 
+struct SDL_Texture;
 
 class ModulePlayer : public Module
 {
@@ -20,8 +21,12 @@ public:
 public:
 
 	bool score;
+<<<<<<< Updated upstream
 	bool win;
 	int wintimer;
+=======
+	SDL_Texture* balltex = nullptr;
+>>>>>>> Stashed changes
 	
 	
 };

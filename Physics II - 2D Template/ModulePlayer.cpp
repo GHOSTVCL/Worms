@@ -4,6 +4,7 @@
 #include "PhysBody.h"
 #include "ModuleRender.h"
 #include "ModulePhysics.h"
+#include "ModuleTextures.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -16,8 +17,13 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 
+<<<<<<< Updated upstream
 	
 	wintimer = -1;
+=======
+	balltex = App->textures->Load("Assets/ball.png");
+
+>>>>>>> Stashed changes
 	score = false;
 	win = false;
 	LOG("Loading player");
@@ -35,6 +41,12 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	
+	
+
+	//pos = b2Vec2(Abalas[i]->body->GetPosition());
+	//App->renderer->DrawTexture(balltex, METERS_TO_PIXELS(App->physics->balls.at(0).x) - 5, METERS_TO_PIXELS(App->physics->balls.at(0).y) - 5);
+	App->renderer->DrawTexture(balltex, App->physics->balls.at(0).x - 5, App->physics->balls.at(0).y - 5);
 
 	if (App->physics->balls.at(0).shot == false) {
 		App->physics->balls.at(0).x = App->physics->players.at(0).x+1;
