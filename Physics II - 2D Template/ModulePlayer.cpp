@@ -41,9 +41,7 @@ update_status ModulePlayer::Update()
 	
 	
 
-	//pos = b2Vec2(Abalas[i]->body->GetPosition());
-	//App->renderer->DrawTexture(balltex, METERS_TO_PIXELS(App->physics->balls.at(0).x) - 5, METERS_TO_PIXELS(App->physics->balls.at(0).y) - 5);
-	App->renderer->DrawTexture(balltex, App->physics->balls.at(0).x - 5, App->physics->balls.at(0).y - 5);
+	App->renderer->DrawTexture(balltex, (App->physics->balls.at(0).x - 5) * 20, -(App->physics->balls.at(0).y - 35) * 20);
 
 	if (App->physics->balls.at(0).shot == false) {
 		App->physics->balls.at(0).x = App->physics->players.at(0).x+1;
