@@ -114,10 +114,10 @@ public:
 
 	// Misc
 	float dt = 1.0 / 60.0;
+	bool debug;
 
 private:
 
-	bool debug;
 };
 
 // Compute modulus of a vector

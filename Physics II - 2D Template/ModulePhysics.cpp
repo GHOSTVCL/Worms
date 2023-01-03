@@ -8,7 +8,7 @@
 
 ModulePhysics::ModulePhysics(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	debug = true;
+	debug = false;
 }
 
 // Destructor
@@ -470,24 +470,26 @@ update_status ModulePhysics::PostUpdate()
 	int color_r, color_g, color_b, alpha_a;
 
 	// Draw Ground
-	color_r = 0; color_g = 255; color_b = 0, alpha_a = 0;
-	App->renderer->DrawQuad(ground.pixels(), color_r, color_g, color_b, alpha_a);
+	if (debug == true) {
+		color_r = 0; color_g = 255; color_b = 0, alpha_a = 255;
+		App->renderer->DrawQuad(ground.pixels(), color_r, color_g, color_b, alpha_a, false);
 
-	// Draw Ground 2
-	color_r = 0; color_g = 255; color_b = 0, alpha_a = 0;
-	App->renderer->DrawQuad(ground_2.pixels(), color_r, color_g, color_b, alpha_a);
+		// Draw Ground 2
+		color_r = 0; color_g = 255; color_b = 0, alpha_a = 255;
+		App->renderer->DrawQuad(ground_2.pixels(), color_r, color_g, color_b, alpha_a, false);
 
-	// Draw Platform
-	color_r = 0; color_g = 255; color_b = 0, alpha_a = 0;
-	App->renderer->DrawQuad(platform.pixels(), color_r, color_g, color_b, alpha_a);
+		// Draw Platform
+		color_r = 0; color_g = 255; color_b = 0, alpha_a = 255;
+		App->renderer->DrawQuad(platform.pixels(), color_r, color_g, color_b, alpha_a, false);
 
-	// Draw Basket
-	color_r = 255; color_g = 0; color_b = 0, alpha_a = 255;
-	App->renderer->DrawQuad(basket.pixels(), color_r, color_g, color_b, alpha_a);
+		// Draw Basket
+		color_r = 255; color_g = 0; color_b = 0, alpha_a = 255;
+		App->renderer->DrawQuad(basket.pixels(), color_r, color_g, color_b, alpha_a, false);
 
-	// Draw water
-	color_r = 0; color_g = 0; color_b = 255, alpha_a = 0;
-	App->renderer->DrawQuad(water.pixels(), color_r, color_g, color_b, alpha_a);
+		// Draw water
+		color_r = 0; color_g = 0; color_b = 255, alpha_a = 255;
+		App->renderer->DrawQuad(water.pixels(), color_r, color_g, color_b, alpha_a, false);
+	}
 
 	// Draw all balls in the scenario
 	for (auto& ball : balls)
@@ -503,8 +505,9 @@ update_status ModulePhysics::PostUpdate()
 		
 
 		// Draw ball
-		App->renderer->DrawCircle(pos_x, pos_y, size_r, color_r, color_g, color_b);
-
+		if (debug == true) {
+			App->renderer->DrawCircle(pos_x, pos_y, size_r, color_r, color_g, color_b);
+		}
 		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && ball.shot == false) {
 			int mou_x = App->input->GetMouseX();
 			int mou_y = App->input->GetMouseY();
@@ -529,7 +532,9 @@ update_status ModulePhysics::PostUpdate()
 		
 
 		// Draw player
-		App->renderer->DrawCircle(pos_x, pos_y, size_r, color_r, color_g, color_b);
+		if (debug == true) {
+			App->renderer->DrawCircle(pos_x, pos_y, size_r, color_r, color_g, color_b);
+		}
 	}
 	return UPDATE_CONTINUE;
 }

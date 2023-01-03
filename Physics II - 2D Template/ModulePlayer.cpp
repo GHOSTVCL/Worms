@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModulePhysics.h"
 #include "ModuleTextures.h"
+#include "ModuleInput.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -20,6 +21,7 @@ bool ModulePlayer::Start()
 	
 	wintimer = -1;
 	balltex = App->textures->Load("Assets/ball.png");
+	wintext = App->textures->Load("Assets/winscreen.png");
 
 	score = false;
 	win = false;
@@ -39,7 +41,9 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 	
-	
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		App->physics->debug = !App->physics->debug;
+	}
 
 	App->renderer->DrawTexture(balltex, (App->physics->balls.at(0).x - 5) * 20, -(App->physics->balls.at(0).y - 35) * 20);
 
@@ -50,13 +54,19 @@ update_status ModulePlayer::Update()
 	
 	if (score == true)
 	{
-		wintimer = 800;
+		
+		wintimer = 500;
 		App->physics->balls.at(0).x = 100;
 		App->physics->balls.at(0).y = 100;
+		score = false;
 		
 	}
 	if (wintimer == 0) {
 		win = true;
+	}
+	if (win == true) {
+		App->renderer->DrawTexture(wintext, 0,0);
+
 	}
 	wintimer--;
 	return UPDATE_CONTINUE;

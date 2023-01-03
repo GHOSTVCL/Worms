@@ -26,6 +26,7 @@ public:
 	int wintimer;
 
 	SDL_Texture* balltex = nullptr;
+	SDL_Texture* wintext = nullptr;
 
 	
 	
