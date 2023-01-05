@@ -24,7 +24,7 @@ public:
 
 	bool win;
 	int wintimer;
-
+	int movement;
 	SDL_Texture* balltex = nullptr;
 	SDL_Texture* wintext = nullptr;
 

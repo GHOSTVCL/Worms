@@ -5,8 +5,8 @@
 #include "ModuleRender.h"
 #include "ModulePhysics.h"
 #include "ModuleTextures.h"
-#include "ModuleInput.h"
-
+#include <windows.h>
+#include <iostream>
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -18,7 +18,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 
-	
+	movement = 1;
 	wintimer = -1;
 	balltex = App->textures->Load("Assets/ball.png");
 	wintext = App->textures->Load("Assets/winscreen.png");
@@ -41,6 +41,37 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 	
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+		if (movement == 1) {
+			movement = 3;
+		}
+		else{
+			movement--;
+		}
+	}
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+		if (movement == 3) {
+			movement = 1;
+		}
+		else {
+			movement++;
+		}
+	}
+	std::cout << movement;
+	//Position Movement
+	if (movement == 2) {
+		
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			App->physics->players.at(0).x = App->physics->players.at(0).x + 0.1;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		{
+			App->physics->players.at(0).x = App->physics->players.at(0).x - 0.1;
+
+		}
+		
+	}
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		App->physics->debug = !App->physics->debug;
 	}

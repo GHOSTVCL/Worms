@@ -160,20 +160,37 @@ update_status ModulePhysics::PreUpdate()
 			compute_hydrodynamic_buoyancy(fhbx, fhby, player, water);
 			player.fx += fhbx; player.fy += fhby; // Add this force to ball's total force
 		}
+		//May the Force Movement
+		if (App->player->movement == 3) {
+			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+			{
+				player.fx = 50;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+			{
+				player.fx = -50;
 
+			}
+
+		}
 		// Other forces
 		// ...
 
 		// Step #2: 2nd Newton's Law
 		// ----------------------------------------------------------------------------------------
-		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-		{
-			player.vx = 5.0f;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		{
-			player.vx = -5.0f;
+		
+		//Velocity movement
+		if (App->player->movement == 1) {
+			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+			{
+				player.vx = 5.0f;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+			{
+				player.vx = -5.0f;
 
+			}
+			
 		}
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE && App->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE)
 		{
