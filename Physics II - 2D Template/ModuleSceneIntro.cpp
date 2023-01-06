@@ -19,7 +19,6 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 
 	//Textures
-	bg_texture = App->textures->Load("Assets/fons.png");
 	Background = App->textures->Load("Assets/Background.png");
 	Ground = App->textures->Load("Assets/Ground.png");
 	Water = App->textures->Load("Assets/Water.png");
@@ -41,8 +40,6 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	App->renderer->Blit(bg_texture, 0, 10, NULL);
-
 	Background_ = { 0,0,1024,758 };
 	App->renderer->Blit(Background, 0, 0, &Background_);
 	Ground_ = { 0,0,500,160 };
@@ -53,19 +50,6 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(Ground, 660, 538, &Platform);
 	Water_ = { 0,0,525,100 };
 	App->renderer->Blit(Water, 500, 658, &Water_);
-	Water_ = { 0,0,525,100 };
-
-	return UPDATE_CONTINUE;
-}
-
-update_status ModuleSceneIntro::PostUpdate()
-{
-	App->renderer->Blit(bg_texture, 0, 10, NULL);
-
-	App->renderer->TextDraw("holaaaa", 30, 400, 255, 0, 0, 255, 15);
-	App->renderer->TextDraw("holaaaa", 500, 750, 255, 0, 0, 255, 15);
-	App->renderer->TextDraw("holaaaa", 0, 0, 255, 0, 0, 255, 15);
-	App->renderer->TextDraw("holaaaa", 499, 800, 255, 0, 0, 100, 30);
 
 	return UPDATE_CONTINUE;
 }
