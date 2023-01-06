@@ -528,7 +528,7 @@ update_status ModulePhysics::PostUpdate()
 		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT && ball.shot == false) {
 			int mou_x = App->input->GetMouseX();
 			int mou_y = App->input->GetMouseY();
-			App->renderer->DrawLine(mou_x, mou_y, METERS_TO_PIXELS(ball.x), -METERS_TO_PIXELS(ball.y)+754, 255, 0, 0);
+			App->renderer->DrawLine(mou_x, mou_y, METERS_TO_PIXELS(ball.x), -METERS_TO_PIXELS(ball.y)+754, 255, 255, 0);
 			ball.fvecx = METERS_TO_PIXELS(ball.x) - mou_x;
 			ball.fvecy = -METERS_TO_PIXELS(ball.y) + 754 - mou_y;
 			ball.canshoot = true;

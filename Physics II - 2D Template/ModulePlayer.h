@@ -21,7 +21,7 @@ public:
 public:
 
 	bool score;
-
+	bool direction;
 	bool win;
 	int wintimer;
 	int movement;
