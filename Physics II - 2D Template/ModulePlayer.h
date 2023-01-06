@@ -27,6 +27,7 @@ public:
 	int movement;
 	SDL_Texture* balltex = nullptr;
 	SDL_Texture* wintext = nullptr;
+	SDL_Texture* playertex = nullptr;
 
 	
 	

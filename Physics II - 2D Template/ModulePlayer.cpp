@@ -20,8 +20,9 @@ bool ModulePlayer::Start()
 
 	movement = 1;
 	wintimer = -1;
-	balltex = App->textures->Load("Assets/ball.png");
+	balltex = App->textures->Load("Assets/ball2.png"); //Ball2 es la textura de la bola 5 veces más pequeña (Mismo radio que el PhysBall)
 	wintext = App->textures->Load("Assets/winscreen.png");
+	playertex = App->textures->Load("Assets/player2.png");
 
 	score = false;
 	win = false;
@@ -76,7 +77,6 @@ update_status ModulePlayer::Update()
 		App->physics->debug = !App->physics->debug;
 	}
 
-	App->renderer->DrawTexture(balltex, (App->physics->balls.at(0).x - 5) * 20, -(App->physics->balls.at(0).y - 35) * 20);
 
 	if (App->physics->balls.at(0).shot == false) {
 		App->physics->balls.at(0).x = App->physics->players.at(0).x+1;
@@ -99,6 +99,10 @@ update_status ModulePlayer::Update()
 		App->renderer->DrawTexture(wintext, 0,0);
 
 	}
+
+	App->renderer->DrawTexture(balltex, (App->physics->balls.at(0).x - 0.5) * 20, -(App->physics->balls.at(0).y - 37.5) * 20); //Draw bola
+	App->renderer->DrawTexture(playertex, (App->physics->players.at(0).x - 0.5) * 20, -(App->physics->players.at(0).y - 36.7) * 20); //Draw player
+
 	wintimer--;
 	return UPDATE_CONTINUE;
 }
