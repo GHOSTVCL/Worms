@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleFont.h"
+#include "ModulePlayer.h"
 #include <iostream>
 using namespace std;
 #include <sstream>
@@ -67,9 +68,18 @@ update_status ModuleSceneIntro::Update()
 	/*string vidas = std::to_string(lifes);
 	const char* lifeschar = vidas.c_str();*/
 
-	App->font->BlitText(10, 15, scoreFont, "s  t  a  g  e           0 1");
-	App->font->BlitText(10, 35, scoreFont, "s  c  o  r  e");
-	App->font->BlitText(215, 35, scoreFont, scorechar);
+	if (App->player->movement == 1) {
+		App->font->BlitText(10, 15, scoreFont, "m o v e m e n t   t y p e ;   v e l o c i t y");
+
+	}
+	if (App->player->movement == 2) {
+		App->font->BlitText(10, 15, scoreFont, "m o v e m e n t   t y p e ;   p o s i t i o n");
+
+	}
+	if (App->player->movement == 3) {
+		App->font->BlitText(10, 15, scoreFont, "m o v e m e n t   t y p e ;   f o r c e");
+
+	}
 	//App->font->BlitText(620, 480, scoreFont, lifeschar);
 	//App->font->BlitText(620,15, scoreFont, scorechar);
 	//App->font->BlitText(620,15, scoreFont, scorechar);
