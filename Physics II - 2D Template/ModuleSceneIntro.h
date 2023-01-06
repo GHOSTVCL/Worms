@@ -49,9 +49,12 @@ public:
 
 	bool Start();
 	update_status Update();
+	update_status PostUpdate();
 	bool CleanUp();
 
 public:
+
+	SDL_Texture* bg_texture = nullptr;
 
 	SDL_Texture* graphics;
 	SDL_Texture* Background;
@@ -64,6 +67,7 @@ public:
 	SDL_Rect Ground_2;
 	SDL_Rect Platform;
 	SDL_Rect Water_;
+	SDL_Rect texto;
 
 	Bouncer bouncer1;
 	Bouncer bouncer2;
