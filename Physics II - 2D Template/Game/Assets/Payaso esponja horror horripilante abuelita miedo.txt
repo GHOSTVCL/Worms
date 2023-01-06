@@ -1,0 +1,273 @@
+//¡¡CUIDAO!! Aquestes coordenades son dels sprites a dins de la spritesheet, no les posicions dels objectes a dins del joc
+
+
+//Coords + dim dels flippers
+//Esquerra
+x = 235
+y = 662
+w = 30
+h = 10
+
+//Dreta
+x = 235
+y = 651
+w = 30
+h = 10
+
+
+//Animació pallasso
+idle.anim(1, 438, 37, 56);
+idle.anim(43, 438, 44, 56);
+idle.anim(92, 438, 62, 56);
+idle.anim(159, 438, 52, 56);
+idle.anim(216, 438, 44, 56);
+idle.anim(256, 438, 43, 56);
+idle.loop = true;
+
+//Animació Canó
+idle.anim(1, 498, 33, 34);
+idle.anim(33, 498, 33, 34);
+idle.anim(69, 498, 33, 34);
+idle.loop = false;
+
+//Coords + dim del suport del canó (on apareix la bola)
+x = 494
+y = 1009
+w = 24
+h = 192
+
+//Animació Rebotador esquerra
+idle.anim(238, 544, 21, 40);
+idle.anim(264, 544, 21, 40);
+idle.loop = false;
+
+//Animació Rebotador dreta
+idle.anim(290, 544, 21, 40);
+idle.anim(316, 544, 21, 40);
+idle.loop = false;
+
+//Coordenades i dimensions de la pedra del mitg
+x = 354
+y = 165
+w = 56
+h = 55
+
+//Coords + dim estrella verda
+x = 131
+y = 548
+w = 14
+h = 14
+
+//Coords + dim estrella groga
+x = 147
+y = 548
+w = 14
+h = 14
+
+//Coords + dim estrella blanca
+x = 125
+y = 563
+w = 14
+h = 14
+
+//Coords + dim estrella blava
+x = 153
+y = 563
+w = 14
+h = 14
+
+//Coords + dim estrella vermella
+x = 139
+y = 569
+w = 14
+h = 14
+
+
+//Coords + dim sigles M.A.P
+//M
+x = 21
+y = 858
+w = 19
+h = 15
+
+//A
+x = 21
+y = 874
+w = 19
+h = 15
+
+//P
+x = 21
+y = 890
+w = 19
+h = 15
+
+//Coords + dim botó M.A.P
+//Normal
+x = 396
+y = 517
+w = 8
+h = 13
+
+//Pulsat
+x = 401
+y = 519
+w = 6
+h = 11
+
+
+//Coords + dim sigles C.H.I.P
+//C
+x = 1
+y = 723
+w = 16
+h = 16
+
+//H
+x = 4
+y = 741
+w = 16
+h = 16
+
+//I
+x = 10
+y = 758
+w = 16
+h = 16
+
+//P
+x = 17
+y = 774
+w = 16
+h = 16
+
+
+//Coords + dim de les 3 llums de la pedra
+// Esquerra
+x = 82
+y = 844
+w = 16
+h = 15
+
+//Mitg
+x = 99
+y = 848
+w = 16
+h = 15
+
+//Dreta
+x = 116
+y = 844
+w = 16
+h = 15
+
+
+//Coords + dim de les 4 fletxes grogues (de dalt a baix)
+x = 199
+y = 735
+w = 12
+h = 18
+
+x = 191
+y = 753
+w = 12
+h = 18
+
+x = 183
+y = 771
+w = 12
+h = 18
+
+x = 175
+y = 789
+w = 12
+h = 18
+
+
+//Coords + dim de la fletxa del boss
+x = 176
+y = 722
+w = 9
+h = 12
+
+
+//Coords + dim de les 3 fletxes vermelles del forat del mig
+//Esquerra
+x = 122
+y = 752
+w = 9
+h = 9
+
+//Mitg
+x = 135
+y = 761
+w = 9
+h = 9
+
+//Dreta
+x = 148
+y = 758
+w = 9
+h = 9
+
+
+//Coords + dim de les fletxes roses (entrada i sortida del carril que passa per sobre del boss)
+//Esquerra
+x = 15
+y = 823
+w = 15
+h = 14
+
+//Dreta
+x = 192
+y = 823
+w = 15
+h = 14
+
+//Coors + dim de la cosa que hi ha a sota de la fletxa rosa de la dreta
+x = 192
+y = 849
+w = 31
+h = 31
+
+
+//Coords + dim de les 3 fletxes blaves del forat de l'esquerra
+x = 82
+y = 731
+w = 23
+h = 19
+
+//Coords + dim de les 4 boles grogues que hi ha a la part inferior (d'esquerra a dreta)
+x = 58
+y = 889
+w = 10
+h = 11
+
+x = 82
+y = 892
+w = 10
+h = 11
+
+x = 226
+y = 892
+w = 10
+h = 11
+
+x = 250
+y = 889
+w = 10
+h = 11
+
+
+//Coords + dim del símbol del pallasso (a baix de les 5 estrelles)
+x = 173
+y = 566
+w = 30
+h = 18
+
+
+//Coords + dim dels canons verds
+x = 52
+y = 617
+w = 16
+h = 21

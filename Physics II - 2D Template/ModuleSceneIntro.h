@@ -83,4 +83,8 @@ public:
 
 	PhysBody* player_lose;
 	uint player_lose_fx;
+
+	int Score = 0;
+	int scoreFont = -1;
+	char scoreText[10] = { "\0" };
 };
