@@ -20,8 +20,8 @@ bool ModuleSceneIntro::Start()
 
 	//Textures
 	bg_texture = App->textures->Load("Assets/fons.png");
-	Background = App->textures->Load("Assets/Background.png");
-	Ground = App->textures->Load("Assets/Ground.png");
+	Background = App->textures->Load("Assets/fondo.png");
+	Ground = App->textures->Load("Assets/terra.png");
 	Water = App->textures->Load("Assets/Water.png");
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
@@ -66,6 +66,9 @@ update_status ModuleSceneIntro::PostUpdate()
 	App->renderer->TextDraw("holaaaa", 500, 750, 255, 0, 0, 255, 15);
 	App->renderer->TextDraw("holaaaa", 0, 0, 255, 0, 0, 255, 15);
 	App->renderer->TextDraw("holaaaa", 499, 800, 255, 0, 0, 100, 30);
-
+	App->renderer->TextDraw("HOLAAA", 30, 400, 255, 0, 0, 255, 15);
+	App->renderer->TextDraw("HOLAAA", 500, 750, 255, 0, 0, 255, 15);
+	App->renderer->TextDraw("HOLAAA", 0, 0, 255, 0, 0, 255, 15);
+	App->renderer->TextDraw("HOLAAA", 499, 800, 255, 0, 0, 100, 30);
 	return UPDATE_CONTINUE;
 }
