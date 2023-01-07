@@ -59,9 +59,6 @@
     <ClInclude Include="ModuleWindow.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Defs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
