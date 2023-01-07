@@ -14,7 +14,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleFont.h"
 #include "Timer.h"
-
+#include "PerfTimer.h"
 
 class Application
 {
@@ -34,7 +34,7 @@ private:
 	p2List<Module*> list_modules;
 
 	uint frames;
-	float dt;
+	float dt = 0.0167f;
 
 	Timer timer;
 
@@ -48,6 +48,8 @@ private:
 
 	float averageFps = 0.0f;
 	float secondsSinceStartup = 0.0f;
+
+	uint32 maxFrameDuration = 60;
 
 public:
 

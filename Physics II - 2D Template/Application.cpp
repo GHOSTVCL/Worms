@@ -128,14 +128,27 @@ update_status Application::Update()
 	std::string auxFPS = std::to_string(averageFps);
 	//static char title[256] = "Av.FPS: ";
 
-	static char fps[10] = {'F', 'P', 'S', ':', ' '};
-	for (int i = 5; i < 10; i++) {
+	static char fps[8] = {'F', 'P', 'S', ':', ' '};
+	for (int i = 5; i < 8; i++) {
 		fps[i] = auxFPS[i - 5];
 	}
 	
 	//_CRT_SECURE_NO_WARNINGS(fps, title);
 
 	window->SetTitle(fps); //Print title
+
+	float delay = float(maxFrameDuration) - dt;
+
+	PerfTimer delayTimer = PerfTimer();
+	delayTimer.Start();
+	if (maxFrameDuration > 0 && delay > 0) {
+		SDL_Delay(delay);
+		LOG("We waited for %f milliseconds and the real delay is % f", delay, delayTimer.ReadMs());
+		dt = maxFrameDuration;
+	}
+	else {
+		//LOG("No wait");
+	}
 
 	return ret;
 }
