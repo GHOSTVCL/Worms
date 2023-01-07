@@ -42,10 +42,10 @@ bool ModulePhysics::Start()
 	platform.h = 2.0f; // [m]
 
 	basket = Ground();
-	basket.x = 13.0f; // [m]
-	basket.y = 22.0f; // [m]
-	basket.w = 1.0f; // [m]
-	basket.h = 2.5f; // [m]
+	basket.x = 16.0f; // [m]
+	basket.y = 20.7f; // [m]
+	basket.w = 2.0f; // [m]
+	basket.h = 3.5f; // [m]
 
 
 
