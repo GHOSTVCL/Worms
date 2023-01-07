@@ -1,4 +1,8 @@
 #include "Application.h"
+#include "ModuleWindow.h"
+#include <sstream>
+
+#define _CRT_SECURE_NO_WARNINGS
 
 Application::Application()
 {
@@ -100,6 +104,38 @@ update_status Application::Update()
 			ret = item->data->PostUpdate();
 		item = item->next;
 	}
+
+
+
+	//Timer FPS
+	frameCount++;
+	// Amount of time since game start (use a low resolution timer)
+	secondsSinceStartup = startupTime.ReadSec();
+	// Amount of ms took the last update
+	dt = frameTime.ReadMSec();
+	// Amount of frames during the last second
+	lastSecFrameCount++;
+	LOG("%f", lastSecFrameTime.ReadMSec());
+	if (lastSecFrameTime.ReadMSec() > 1000) {
+		lastSecFrameTime.Start();
+		framesPerSecond = lastSecFrameCount;
+		lastSecFrameCount = 0;
+		// Average FPS for the whole game life
+		averageFps = (averageFps + framesPerSecond) / 2;
+	}
+	
+	// Shows the time measurements in the window title
+	std::string auxFPS = std::to_string(averageFps);
+	//static char title[256] = "Av.FPS: ";
+
+	static char fps[10] = {'F', 'P', 'S', ':', ' '};
+	for (int i = 5; i < 10; i++) {
+		fps[i] = auxFPS[i - 5];
+	}
+	
+	//_CRT_SECURE_NO_WARNINGS(fps, title);
+
+	window->SetTitle(fps); //Print title
 
 	return ret;
 }

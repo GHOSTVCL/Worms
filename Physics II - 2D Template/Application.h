@@ -13,6 +13,8 @@
 #include "ModulePhysics.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleFont.h"
+#include "Timer.h"
+
 
 class Application
 {
@@ -30,6 +32,22 @@ public:
 private:
 
 	p2List<Module*> list_modules;
+
+	uint frames;
+	float dt;
+
+	Timer timer;
+
+	Timer startupTime;
+	Timer frameTime;
+	Timer lastSecFrameTime;
+
+	uint64 frameCount = 0;
+	uint32 framesPerSecond = 0;
+	uint32 lastSecFrameCount = 0;
+
+	float averageFps = 0.0f;
+	float secondsSinceStartup = 0.0f;
 
 public:
 

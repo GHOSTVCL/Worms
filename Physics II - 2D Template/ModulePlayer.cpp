@@ -86,12 +86,12 @@ update_status ModulePlayer::Update()
 
 	if (App->physics->balls.at(0).shot == false) {
 		if (direction == true) {
-			App->physics->balls.at(0).x = App->physics->players.at(0).x + 1;
-			App->physics->balls.at(0).y = App->physics->players.at(0).y + 1;
+			App->physics->balls.at(0).x = App->physics->players.at(0).x + 1.5;
+			App->physics->balls.at(0).y = App->physics->players.at(0).y + 3;
 		}
 		if (direction == false) {
-			App->physics->balls.at(0).x = App->physics->players.at(0).x - 1;
-			App->physics->balls.at(0).y = App->physics->players.at(0).y + 1;
+			App->physics->balls.at(0).x = App->physics->players.at(0).x - 1.5;
+			App->physics->balls.at(0).y = App->physics->players.at(0).y + 3;
 		}
 	}
 	
@@ -112,11 +112,11 @@ update_status ModulePlayer::Update()
 
 	}
 	if (direction == true) {
-		App->renderer->DrawTexture(playertex, (App->physics->players.at(0).x - 0.5) * 20, -(App->physics->players.at(0).y - 36.7) * 20); //Draw player
+		App->renderer->DrawTexture(playertex, (App->physics->players.at(0).x - 1.1) * 20, -(App->physics->players.at(0).y - 35) * 20); //Draw player
 
 	}
 	if (direction == false) {
-		App->renderer->DrawFlippedTexture(playertex, (App->physics->players.at(0).x - 0.5) * 20, -(App->physics->players.at(0).y - 36.7) * 20); //Draw player
+		App->renderer->DrawTexture(playertex, (App->physics->players.at(0).x - 1.1) * 20, -(App->physics->players.at(0).y - 35) * 20); //Draw player
 
 	}
 	App->renderer->DrawTexture(balltex, (App->physics->balls.at(0).x - 0.5) * 20, -(App->physics->balls.at(0).y - 37.5) * 20); //Draw bola

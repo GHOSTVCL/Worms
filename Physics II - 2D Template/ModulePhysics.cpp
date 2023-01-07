@@ -93,7 +93,7 @@ bool ModulePhysics::Start()
 	
 	player.mass = 5.0f; // [kg]
 	player.surface = 1.0f; // [m^2]
-	player.radius = 0.8f; // [m]
+	player.radius = 1.5f; // [m]
 	player.cd = 0.1f; // [-]
 	player.cl = 0.1f; // [-]
 	player.b = 0.1f; // [...]
