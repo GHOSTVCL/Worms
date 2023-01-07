@@ -28,9 +28,10 @@ bool ModuleSceneIntro::Start()
 
 	//Textures
 	Background = App->textures->Load("Assets/fons.png");
-	Ground = App->textures->Load("Assets/terra.png");
+	//canviar entre mayaground a mayaground5 a gust
+	Ground = App->textures->Load("Assets/mayaground.png");
 	Water = App->textures->Load("Assets/Water.png");
-	Basket = App->textures->Load("Assets/ring.png");
+	Basket = App->textures->Load("Assets/basket.png");
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 	

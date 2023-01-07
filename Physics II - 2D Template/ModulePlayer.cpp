@@ -21,7 +21,7 @@ bool ModulePlayer::Start()
 	movement = 1;
 	wintimer = -1;
 	balltex = App->textures->Load("Assets/ball2.png"); //Ball2 es la textura de la bola 5 veces más pequeña (Mismo radio que el PhysBall)
-	wintext = App->textures->Load("Assets/winscreen.png");
+	wintext = App->textures->Load("Assets/wintexture.png");
 	playertex = App->textures->Load("Assets/player2.png");
 	direction = true;
 	score = false;
