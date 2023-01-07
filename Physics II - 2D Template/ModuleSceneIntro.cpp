@@ -30,6 +30,7 @@ bool ModuleSceneIntro::Start()
 	Background = App->textures->Load("Assets/fons.png");
 	Ground = App->textures->Load("Assets/terra.png");
 	Water = App->textures->Load("Assets/Water.png");
+	Basket = App->textures->Load("Assets/ring.png");
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 	
@@ -58,7 +59,8 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(Ground, 660, 538, &Platform);
 	Water_ = { 0,0,525,100 };
 	App->renderer->Blit(Water, 500, 658, &Water_);
-
+	Basket_ = { 0,0,75,98 };
+	App->renderer->Blit(Basket, 300, 260, &Basket_);
 
 	App->font->BlitText(58, 248, scoreFont, scoreText);
 

@@ -57,6 +57,7 @@ public:
 	SDL_Texture* Background;
 	SDL_Texture* Ground;
 	SDL_Texture* Water;
+	SDL_Texture* Basket;
 	PhysBody* background;
 
 	SDL_Rect Background_;
@@ -64,6 +65,7 @@ public:
 	SDL_Rect Ground_2;
 	SDL_Rect Platform;
 	SDL_Rect Water_;
+	SDL_Rect Basket_;
 
 	Bouncer bouncer1;
 	Bouncer bouncer2;
