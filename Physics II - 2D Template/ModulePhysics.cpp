@@ -474,7 +474,6 @@ update_status ModulePhysics::PreUpdate()
 		if (is_colliding_with_ground(ball, basket))
 		{
 			App->player->score = true;
-			App->player->win = true;
 			App->audio->PlayFx(ScoreFX);
 		}
 	}

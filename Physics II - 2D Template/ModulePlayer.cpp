@@ -20,9 +20,13 @@ bool ModulePlayer::Start()
 
 	movement = 1;
 	wintimer = -1;
+	losetimer = -1;
 	balltex = App->textures->Load("Assets/ball2.png"); //Ball2 es la textura de la bola 5 veces más pequeña (Mismo radio que el PhysBall)
 	wintext = App->textures->Load("Assets/wintexture.png");
+	losetext = App->textures->Load("Assets/losetexture.png");
 	playertex = App->textures->Load("Assets/player2.png");
+	loseSFX = App->audio->LoadFx("Assets/Audios/Lose.wav");
+
 	direction = true;
 	score = false;
 	win = false;
@@ -98,30 +102,46 @@ update_status ModulePlayer::Update()
 	if (score == true)
 	{
 		
-		wintimer = 500;
+		wintimer = 450;
 		App->physics->balls.at(0).x = 100;
 		App->physics->balls.at(0).y = 100;
 		score = false;
 		
 	}
+	if (App->physics->balls.at(0).shot == true && losetimer < -1 && win == false) {
+		losetimer = 900;
+	}
+	if (losetimer == 0) {
+		lose = true;
+		App->audio->PlayFx(loseSFX);
+
+	}
+	//lose image
+	if (lose == true) {
+		App->renderer->DrawTexture(losetext, 0, 0);
+	}
 	if (wintimer == 0) {
 		win = true;
 	}
+	//win image
 	if (win == true) {
-		App->renderer->DrawTexture(wintext, 0,0);
+		App->renderer->DrawTexture(wintext, 0, 0);
 
 	}
-	if (direction == true) {
+
+	if (direction == true && win == false && lose == false) {
 		App->renderer->DrawTexture(playertex, (App->physics->players.at(0).x - 1.1) * 20, -(App->physics->players.at(0).y - 35) * 20); //Draw player
 
 	}
-	if (direction == false) {
+	if (direction == false && win == false && lose == false) {
 		App->renderer->DrawTexture(playertex, (App->physics->players.at(0).x - 1.1) * 20, -(App->physics->players.at(0).y - 35) * 20); //Draw player
-
 	}
-	App->renderer->DrawTexture(balltex, (App->physics->balls.at(0).x - 0.5) * 20, -(App->physics->balls.at(0).y - 37.5) * 20); //Draw bola
+	if (win == false && lose == false) {
+		App->renderer->DrawTexture(balltex, (App->physics->balls.at(0).x - 0.5) * 20, -(App->physics->balls.at(0).y - 37.5) * 20); //Draw bola
+	}
 
 	wintimer--;
+	losetimer--;
 	return UPDATE_CONTINUE;
 }
 

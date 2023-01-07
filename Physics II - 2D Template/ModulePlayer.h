@@ -23,10 +23,15 @@ public:
 	bool score;
 	bool direction;
 	bool win;
+	bool lose;
 	int wintimer;
+	int losetimer;
 	int movement;
+	uint loseSFX;
+
 	SDL_Texture* balltex = nullptr;
 	SDL_Texture* wintext = nullptr;
+	SDL_Texture* losetext = nullptr;
 	SDL_Texture* playertex = nullptr;
 
 	
