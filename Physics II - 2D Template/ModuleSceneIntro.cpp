@@ -29,7 +29,7 @@ bool ModuleSceneIntro::Start()
 	//Textures
 	Background = App->textures->Load("Assets/fons.png");
 	//canviar entre mayaground a mayaground5 a gust
-	Ground = App->textures->Load("Assets/mayaground.png");
+	Ground = App->textures->Load("Assets/mayaground2.png");
 	Water = App->textures->Load("Assets/Water.png");
 	Basket = App->textures->Load("Assets/basket.png");
 
@@ -61,7 +61,7 @@ update_status ModuleSceneIntro::Update()
 	Water_ = { 0,0,525,100 };
 	App->renderer->Blit(Water, 500, 658, &Water_);
 	Basket_ = { 0,0,75,98 };
-	App->renderer->Blit(Basket, 300, 260, &Basket_);
+	App->renderer->Blit(Basket, 243, 260, &Basket_);
 
 	App->font->BlitText(58, 248, scoreFont, scoreText);
 

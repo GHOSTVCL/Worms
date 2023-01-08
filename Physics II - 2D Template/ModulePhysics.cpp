@@ -42,7 +42,7 @@ bool ModulePhysics::Start()
 	platform.h = 2.0f; // [m]
 
 	basket = Ground();
-	basket.x = 16.0f; // [m]
+	basket.x = 13.0f; // [m]
 	basket.y = 20.7f; // [m]
 	basket.w = 2.0f; // [m]
 	basket.h = 3.5f; // [m]
@@ -91,7 +91,7 @@ bool ModulePhysics::Start()
 	balls.emplace_back(ball);
 
 	
-	player.mass = 5.0f; // [kg]
+	player.mass = 20.0f; // [kg]
 	player.surface = 1.0f; // [m^2]
 	player.radius = 1.5f; // [m]
 	player.cd = 0.1f; // [-]
@@ -103,7 +103,7 @@ bool ModulePhysics::Start()
 
 	// Set initial position and velocity of the ball
 	player.x = 2.0f;
-	player.y = (ground.y + ground.h) + 0.8f;
+	player.y = (ground.y + ground.h) + 1.0f;
 	player.vx = 0.1f;
 	player.vy = 0.0f;
 

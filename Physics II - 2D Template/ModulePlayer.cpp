@@ -130,11 +130,11 @@ update_status ModulePlayer::Update()
 	}
 
 	if (direction == true && win == false && lose == false) {
-		App->renderer->DrawTexture(playertex, (App->physics->players.at(0).x - 1.1) * 20, -(App->physics->players.at(0).y - 35) * 20); //Draw player
+		App->renderer->DrawTexture(playertex, (App->physics->players.at(0).x - 1.1) * 20, -(App->physics->players.at(0).y - 35.3) * 20); //Draw player
 
 	}
 	if (direction == false && win == false && lose == false) {
-		App->renderer->DrawTexture(playertex, (App->physics->players.at(0).x - 1.1) * 20, -(App->physics->players.at(0).y - 35) * 20); //Draw player
+		App->renderer->DrawTexture(playertex, (App->physics->players.at(0).x - 1.1) * 20, -(App->physics->players.at(0).y - 35.3) * 20); //Draw player
 	}
 	if (win == false && lose == false) {
 		App->renderer->DrawTexture(balltex, (App->physics->balls.at(0).x - 0.5) * 20, -(App->physics->balls.at(0).y - 37.5) * 20); //Draw bola
