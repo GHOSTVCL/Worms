@@ -50,6 +50,27 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	{
+		Ground = App->textures->Load("Assets/mayaground.png");
+	}
+	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+	{
+		Ground = App->textures->Load("Assets/mayaground2.png");
+	}
+	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+	{
+		Ground = App->textures->Load("Assets/mayaground3.png");
+	}
+	if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
+	{
+		Ground = App->textures->Load("Assets/mayaground4.png");
+	}
+	if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	{
+		Ground = App->textures->Load("Assets/mayaground5.png");
+	}
+
 	Background_ = { 0,0,1024,758 };
 	App->renderer->Blit(Background, 0, 0, &Background_);
 	Ground_ = { 0,0,500,160 };
