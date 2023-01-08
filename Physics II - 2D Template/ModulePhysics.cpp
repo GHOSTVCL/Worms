@@ -171,11 +171,11 @@ update_status ModulePhysics::PreUpdate()
 		if (App->player->movement == 3) {
 			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 			{
-				player.fx = 300;
+				player.fx = 500;
 			}
 			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 			{
-				player.fx = -300;
+				player.fx = -500;
 
 			}
 
