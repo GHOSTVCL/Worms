@@ -49,6 +49,10 @@ Application::~Application()
 
 bool Application::Init()
 {
+	timer.Start();
+	startupTime.Start();
+	lastSecFrameTime.Start();
+
 	bool ret = true;
 
 	// Call Init() in all modules
