@@ -75,12 +75,21 @@ bool Application::Init()
 		item = item->next;
 	}
 	
+	changeFrameRate = 16;
+	maxFrameDuration = changeFrameRate;
+
 	return ret;
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
 update_status Application::Update()
 {
+	frameCount++;
+	lastSecFrameCount++;
+
+	dt = frameDuration->ReadMs();
+	frameDuration->Start();
+
 	update_status ret = UPDATE_CONTINUE;
 	p2List_item<Module*>* item = list_modules.getFirst();
 
@@ -109,52 +118,37 @@ update_status Application::Update()
 		item = item->next;
 	}
 
+	FinishUpdate();
+	return ret;
+}
 
+void Application::FinishUpdate()
+{
+	float secondsSinceStartup = startupTime.ReadSec();
 
-	//Timer FPS
-	frameCount++;
-	// Amount of time since game start (use a low resolution timer)
-	secondsSinceStartup = startupTime.ReadSec();
-	// Amount of ms took the last update
-	dt = frameTime.ReadMSec();
-	// Amount of frames during the last second
-	lastSecFrameCount++;
-	LOG("%f", lastSecFrameTime.ReadMSec());
 	if (lastSecFrameTime.ReadMSec() > 1000) {
 		lastSecFrameTime.Start();
 		framesPerSecond = lastSecFrameCount;
 		lastSecFrameCount = 0;
-		// Average FPS for the whole game life
 		averageFps = (averageFps + framesPerSecond) / 2;
 	}
-	
-	// Shows the time measurements in the window title
-	std::string auxFPS = std::to_string(averageFps);
-	//static char title[256] = "Av.FPS: ";
 
-	static char fps[8] = {'F', 'P', 'S', ':', ' '};
-	for (int i = 5; i < 8; i++) {
-		fps[i] = auxFPS[i - 5];
-	}
-	
-	//_CRT_SECURE_NO_WARNINGS(fps, title);
+	static char title[256];
+	sprintf_s(title, 256, "Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u ",
+		averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
 
-	window->SetTitle(fps); //Print title
+	float delay = float(maxFrameDuration) - frameDuration->ReadMs();
 
-	float delay = float(maxFrameDuration) - dt;
-
-	PerfTimer delayTimer = PerfTimer();
-	delayTimer.Start();
-	if (maxFrameDuration > 0 && delay > 0) {
-		SDL_Delay(delay);
-		LOG("We waited for %f milliseconds and the real delay is % f", delay, delayTimer.ReadMs());
-		dt = maxFrameDuration;
-	}
-	else {
-		//LOG("No wait");
+	PerfTimer* delayt = new PerfTimer();
+	delayt->Start();
+	if (maxFrameDuration > 0 && delay > 0)
+	{
+		SDL_Delay(delay + 0.7);
 	}
 
-	return ret;
+	window->SetTitle(title);
+
+	maxFrameDuration = changeFrameRate;
 }
 
 bool Application::CleanUp()

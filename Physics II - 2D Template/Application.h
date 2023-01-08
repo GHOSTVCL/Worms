@@ -34,7 +34,7 @@ private:
 	p2List<Module*> list_modules;
 
 	uint frames;
-	float dt = 0.0167f;
+	float dt = 0.0f;
 
 	Timer timer;
 
@@ -50,6 +50,9 @@ private:
 	float secondsSinceStartup = 0.0f;
 
 	uint32 maxFrameDuration = 60;
+	uint32 changeFrameRate;
+
+	PerfTimer* frameDuration;;
 
 public:
 
@@ -58,7 +61,9 @@ public:
 
 	bool Init();
 	update_status Update();
+	void FinishUpdate();
 	bool CleanUp();
+
 
 private:
 

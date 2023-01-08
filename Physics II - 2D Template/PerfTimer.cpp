@@ -6,6 +6,7 @@
 #include "SDL\include\SDL_timer.h"
 
 uint64 PerfTimer::frequency = 0;
+uint64 PerfTimer::startTime = 0;
 
 // L13: TODO 2: Fill Constructor, Start(),ReadMs() and ReadTicks() methods
 // they are simple, one line each!
@@ -23,7 +24,10 @@ void PerfTimer::Start()
 
 double PerfTimer::ReadMs() const
 {
-	return 1000.0 * (double(SDL_GetPerformanceCounter() - startTime) / double(frequency));
+	double f = double(SDL_GetPerformanceFrequency());
+	double c = double(SDL_GetPerformanceCounter() - startTime);
+	return 1000.0 * c / f;
+
 }
 
 uint64 PerfTimer::ReadTicks() const

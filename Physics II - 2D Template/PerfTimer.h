@@ -15,7 +15,7 @@ public:
 	uint64 ReadTicks() const;
 
 private:
-	uint64 startTime;
+	static uint64 startTime;
 	static uint64 frequency;
 };
 
