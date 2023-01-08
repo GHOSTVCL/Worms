@@ -56,7 +56,7 @@ bool ModulePhysics::Start()
 	water.y = 0.0f; // [m]
 	water.w = 35.0f; // [m]
 	water.h = 5.0f; // [m]
-	water.density = 50.0f; // [kg/m^3]
+	water.density = 130.0f; // [kg/m^3]
 	water.vx = 0.0f; // [m/s]
 	water.vy = 0.0f; // [m/s]
 
@@ -94,7 +94,7 @@ bool ModulePhysics::Start()
 	
 	player.mass = 20.0f; // [kg]
 	player.surface = 1.0f; // [m^2]
-	player.radius = 1.5f; // [m]
+	player.radius = 1.3f; // [m]
 	player.cd = 0.1f; // [-]
 	player.cl = 0.1f; // [-]
 	player.b = 0.1f; // [...]
@@ -137,7 +137,7 @@ update_status ModulePhysics::PreUpdate()
 
 		// Gravity force
 		float fgx = player.mass * 0.0f;
-		float fgy = player.mass * -10.0f; // Let's assume gravity is constant and downwards
+		float fgy = player.mass * -30.0f; // Let's assume gravity is constant and downwards
 		player.fx += fgx; player.fy += fgy; // Add this force to ball's total force
 
 		// Aerodynamic Drag force (only when not in water)
@@ -165,11 +165,11 @@ update_status ModulePhysics::PreUpdate()
 		if (App->player->movement == 3) {
 			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 			{
-				player.fx = 50;
+				player.fx = 150;
 			}
 			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 			{
-				player.fx = -50;
+				player.fx = -150;
 
 			}
 
@@ -184,11 +184,11 @@ update_status ModulePhysics::PreUpdate()
 		if (App->player->movement == 1) {
 			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 			{
-				player.vx = 5.0f;
+				player.vx = 20.0f;
 			}
 			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 			{
-				player.vx = -5.0f;
+				player.vx = -20.0f;
 
 			}
 			
@@ -338,7 +338,7 @@ update_status ModulePhysics::PreUpdate()
 
 		// Gravity force
 		float fgx = ball.mass * 0.0f;
-		float fgy = ball.mass * -10.0f; // Let's assume gravity is constant and downwards
+		float fgy = ball.mass * -30.0f; // Let's assume gravity is constant and downwards
 		ball.fx += fgx; ball.fy += fgy; // Add this force to ball's total force
 
 		// Aerodynamic Drag force (only when not in water)
@@ -371,8 +371,8 @@ update_status ModulePhysics::PreUpdate()
 		// ----------------------------------------------------------------------------------------
 		if (App->input->GetKey(SDL_SCANCODE_E) == KEY_IDLE && ball.canshoot == true) {
 
-			ball.vx = ball.fvecx / 7;
-			ball.vy = -ball.fvecy / 7;
+			ball.vx = ball.fvecx / 3;
+			ball.vy = -ball.fvecy / 3;
 			ball.shot = true;
 			ball.canshoot = false;
 

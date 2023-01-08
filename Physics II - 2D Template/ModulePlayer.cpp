@@ -116,21 +116,21 @@ update_status ModulePlayer::Update()
 	if (score == true)
 	{
 		
-		wintimer = 450;
+		wintimer = 80;
 		App->physics->balls.at(0).x = 100;
 		App->physics->balls.at(0).y = 100;
 		score = false;
 		
 	}
 	if (App->physics->balls.at(0).shot == true && losetimer < -1 && win == false) {
-		losetimer = 900;
+		losetimer = 60*7;
 	}
-	if (losetimer == 0) {
+	if (losetimer == 0 && win == false) {
 		lose = true;
 		App->audio->PlayFx(loseSFX);
 	}
 	//lose image
-	if (lose == true) {
+	if (lose == true && win == false) {
 		App->renderer->DrawTexture(losetext, 0, 0);
 	}
 	if (wintimer == 0) {
@@ -147,7 +147,7 @@ update_status ModulePlayer::Update()
 
 	}
 	if (direction == false && win == false && lose == false) {
-		App->renderer->DrawTexture(playertex, (App->physics->players.at(0).x - 1.1) * 20, -(App->physics->players.at(0).y - 35.3) * 20); //Draw player
+		App->renderer->DrawFlippedTexture(playertex, (App->physics->players.at(0).x - 1.1) * 20, -(App->physics->players.at(0).y - 35.3) * 20); //Draw player
 	}
 	if (win == false && lose == false) {
 		App->renderer->DrawTexture(balltex, (App->physics->balls.at(0).x - 0.5) * 20, -(App->physics->balls.at(0).y - 37.5) * 20); //Draw bola

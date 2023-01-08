@@ -83,6 +83,21 @@ update_status ModuleSceneIntro::Update()
 		App->font->BlitText(10, 15, scoreFont, "m o v e m e n t   t y p e ;   f o r c e");
 
 	}
+	if (App->player->integrator == 1)
+	{
+		App->font->BlitText(10, 50, scoreFont, "i n t e g r a t o r   t y p e ;   v e r l e t");
+	}
+	// Integration scheme: Forward Euler
+	if (App->player->integrator == 2)
+	{
+		App->font->BlitText(10, 50, scoreFont, "i n t e g r a t o r   t y p e ;   f o r w a r d  e u l e r");
+	}
+	// Integration scheme: Backward Euler
+	if (App->player->integrator == 3)
+	{
+		App->font->BlitText(10, 50, scoreFont, "i n t e g r a t o r   t y p e ;   b a c k w a r d  e u l e r");
+
+	}
 	//App->font->BlitText(620, 480, scoreFont, lifeschar);
 	//App->font->BlitText(620,15, scoreFont, scorechar);
 	//App->font->BlitText(620,15, scoreFont, scorechar);
