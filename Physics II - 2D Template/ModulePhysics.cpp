@@ -137,7 +137,13 @@ update_status ModulePhysics::PreUpdate()
 
 		// Gravity force
 		float fgx = player.mass * 0.0f;
-		float fgy = player.mass * -30.0f; // Let's assume gravity is constant and downwards
+		float fgy;
+		if (App->player->grav == true) {
+			fgy = player.mass * -30.0f; // Let's assume gravity is constant and downwards
+		};
+		if (App->player->grav == false) {
+			fgy = player.mass * -10.0f; // Let's assume gravity is constant and downwards
+		};
 		player.fx += fgx; player.fy += fgy; // Add this force to ball's total force
 
 		// Aerodynamic Drag force (only when not in water)
@@ -165,11 +171,11 @@ update_status ModulePhysics::PreUpdate()
 		if (App->player->movement == 3) {
 			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 			{
-				player.fx = 150;
+				player.fx = 300;
 			}
 			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 			{
-				player.fx = -150;
+				player.fx = -300;
 
 			}
 
@@ -338,7 +344,13 @@ update_status ModulePhysics::PreUpdate()
 
 		// Gravity force
 		float fgx = ball.mass * 0.0f;
-		float fgy = ball.mass * -30.0f; // Let's assume gravity is constant and downwards
+		float fgy;
+		if (App->player->grav == true) {
+			fgy = ball.mass * -30.0f; // Let's assume gravity is constant and downwards
+		}
+		if (App->player->grav == false) {
+			fgy = ball.mass * -10.0f; // Let's assume gravity is constant and downwards
+		} // Let's assume gravity is constant and downwards
 		ball.fx += fgx; ball.fy += fgy; // Add this force to ball's total force
 
 		// Aerodynamic Drag force (only when not in water)

@@ -28,7 +28,7 @@ public:
 	int integrator;
 	int losetimer;
 	int movement;
-	
+	bool grav;
 	uint loseSFX;
 
 	SDL_Texture* balltex = nullptr;

@@ -98,6 +98,14 @@ update_status ModuleSceneIntro::Update()
 		App->font->BlitText(10, 50, scoreFont, "i n t e g r a t o r   t y p e ;   b a c k w a r d  e u l e r");
 
 	}
+	if (App->player->grav == true) {
+		App->font->BlitText(10, 80, scoreFont, "g r a v i t y ;   e a r t h");
+
+	}
+	if (App->player->grav == false) {
+		App->font->BlitText(10, 80, scoreFont, "g r a v i t y ;   m o o n");
+
+	}
 	//App->font->BlitText(620, 480, scoreFont, lifeschar);
 	//App->font->BlitText(620,15, scoreFont, scorechar);
 	//App->font->BlitText(620,15, scoreFont, scorechar);

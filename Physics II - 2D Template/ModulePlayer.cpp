@@ -28,7 +28,7 @@ bool ModulePlayer::Start()
 	playertex = App->textures->Load("Assets/playeranim.png");
 	loseSFX = App->audio->LoadFx("Assets/Audios/Lose.wav");
 	
-
+	grav = true;
 	direction = true;
 	score = false;
 	win = false;
@@ -76,11 +76,11 @@ update_status ModulePlayer::Update()
 		
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
-			App->physics->players.at(0).x = App->physics->players.at(0).x + 0.1;
+			App->physics->players.at(0).x = App->physics->players.at(0).x + 0.4;
 		}
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			App->physics->players.at(0).x = App->physics->players.at(0).x - 0.1;
+			App->physics->players.at(0).x = App->physics->players.at(0).x - 0.4;
 
 		}
 		
@@ -100,6 +100,9 @@ update_status ModulePlayer::Update()
 	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 	{
 		integrator = 3;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) {
+		grav = !grav;
 	}
 
 	if (App->physics->balls.at(0).shot == false) {
@@ -123,7 +126,12 @@ update_status ModulePlayer::Update()
 		
 	}
 	if (App->physics->balls.at(0).shot == true && losetimer < -1 && win == false) {
-		losetimer = 60*7;
+		if (grav == true) {
+			losetimer = 60 * 7;
+		}
+		if (grav == false) {
+			losetimer = 60 * 10;
+		}
 	}
 	if (losetimer == 0 && win == false) {
 		lose = true;
