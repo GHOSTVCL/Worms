@@ -25,7 +25,7 @@ bool ModulePlayer::Start()
 	balltex = App->textures->Load("Assets/ball2.png"); //Ball2 es la textura de la bola 5 veces más pequeña (Mismo radio que el PhysBall)
 	wintext = App->textures->Load("Assets/wintexture.png");
 	losetext = App->textures->Load("Assets/losetexture.png");
-	playertex = App->textures->Load("Assets/player2.png");
+	playertex = App->textures->Load("Assets/playeranim.png");
 	loseSFX = App->audio->LoadFx("Assets/Audios/Lose.wav");
 
 	direction = true;
