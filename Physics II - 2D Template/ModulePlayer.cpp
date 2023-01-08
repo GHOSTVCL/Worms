@@ -27,6 +27,7 @@ bool ModulePlayer::Start()
 	losetext = App->textures->Load("Assets/losetexture.png");
 	playertex = App->textures->Load("Assets/player2.png");
 	loseSFX = App->audio->LoadFx("Assets/Audios/Lose.wav");
+	
 
 	direction = true;
 	score = false;
@@ -127,7 +128,6 @@ update_status ModulePlayer::Update()
 	if (losetimer == 0) {
 		lose = true;
 		App->audio->PlayFx(loseSFX);
-
 	}
 	//lose image
 	if (lose == true) {

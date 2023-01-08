@@ -20,7 +20,8 @@ bool ModulePhysics::Start()
 {
 	LOG("Creating Physics 2D environment");
 
-	ScoreFX = App->audio->LoadFx("Assets/Audios/Score.wav");
+	ScoreFX = App->audio->LoadFx("Assets/Audios/Win.wav");
+	
 
 	// Create ground
 	ground = Ground();
