@@ -2,32 +2,32 @@
 
 ## Description
 
-A basketball game made by four CITM students.
+An aztec basketball game made by four CITM students.
 
 !WARNING!: Volume can be pretty loud in some systems.
 
 ## Key Features
 
- - The player can throw a ball to a basket.
- - The movement can be cahnged.
- - The gravity can be changed.
- - The integrators can be changed.
- - The player can't jump, but he can use the water to arrive to the platform.
+ - The player can throw a ball.
+ - The player can change the type of movement of the character.
+ - The player can change the gravity.
+ - The player can change the velocity integrators.
+ - The character can't jump so he must use the water to get to some places.
  - VSync is off so the game runs at 60 FPS.
 
 ## How to win
 
-To win in this basketball game the player has to encase the ball in the basket.
+To win you have to throw the ball in to the ring.
 
 ## Controls
 
-  - UP and DOWN ARROWS: Change the movement of the player.
-  - G: Change the gravity.
-  - E: Throw the ball, aiming with the mouse.
-  - Z, X, C, V o B: change the sprite of the floor.
   - A and D: Move the player.
-  - 1,2 and 3: change the integrators.
+  - E: Throw the ball, aiming with the mouse.
   - F1: Show the collisions.
+  - UP and DOWN ARROWS: Change the movement type of the player (position, velocity and force).
+  - 1,2 and 3: change the integrators(Verlet, Backwards and Forwards Euler).
+  - G: Change the gravity (earth/moon).
+  - Z, X, C, V o B: change the sprite of the floor.
 
 ## Developers
 
