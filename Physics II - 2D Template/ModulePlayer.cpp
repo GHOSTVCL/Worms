@@ -19,6 +19,7 @@ bool ModulePlayer::Start()
 {
 
 	movement = 1;
+	integrator = 1;
 	wintimer = -1;
 	losetimer = -1;
 	balltex = App->textures->Load("Assets/ball2.png"); //Ball2 es la textura de la bola 5 veces más pequeña (Mismo radio que el PhysBall)
@@ -87,6 +88,18 @@ update_status ModulePlayer::Update()
 		App->physics->debug = !App->physics->debug;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		integrator = 1;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		integrator = 2;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	{
+		integrator = 3;
+	}
 
 	if (App->physics->balls.at(0).shot == false) {
 		if (direction == true) {
