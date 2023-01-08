@@ -204,8 +204,20 @@ update_status ModulePhysics::PreUpdate()
 		// ----------------------------------------------------------------------------------------
 
 		// We will use the 2nd order "Velocity Verlet" method for integration.
-		integrator_velocity_verlet(player, dt);
-
+		if (App->player->integrator == 1)
+		{
+			integrator_velocity_verlet(player, dt);
+		}
+		// Integration scheme: Forward Euler
+		if (App->player->integrator == 2)
+		{
+			Integrator_Euler_Forward(player, dt);
+		}
+		// Integration scheme: Backward Euler
+		if (App->player->integrator == 3)
+		{
+			Integrator_Euler_Backward(player, dt);
+		}
 		// Step #4: solve collisions
 		// ----------------------------------------------------------------------------------------
 
@@ -372,7 +384,20 @@ update_status ModulePhysics::PreUpdate()
 		// ----------------------------------------------------------------------------------------
 
 		// We will use the 2nd order "Velocity Verlet" method for integration.
-		integrator_velocity_verlet(ball, dt);
+		if (App->player->integrator == 1)
+		{
+			integrator_velocity_verlet(ball, dt);
+		}
+		// Integration scheme: Forward Euler
+		if (App->player->integrator == 2)
+		{
+			Integrator_Euler_Forward(ball, dt);
+		}
+		// Integration scheme: Backward Euler
+		if (App->player->integrator == 3)
+		{
+			Integrator_Euler_Backward(ball, dt);
+		}
 
 		// Step #4: solve collisions
 		// ----------------------------------------------------------------------------------------
@@ -517,7 +542,6 @@ update_status ModulePhysics::PostUpdate()
 		int size_r = METERS_TO_PIXELS(ball.radius);
 
 		// Select color
-		
 		color_r = 255; color_g = 0; color_b = 0;
 		
 
@@ -615,6 +639,24 @@ void integrator_velocity_verlet(PhysBall& ball, float dt)
 	ball.vy += ball.ay * dt;
 }
 
+void Integrator_Euler_Forward(PhysBall& ball, float dt) {
+
+	ball.vx += (ball.ax * dt);
+	ball.vy += (ball.ay * dt);
+	ball.x += (ball.vx * dt);
+	ball.y += (ball.vy * dt);
+
+}
+
+void Integrator_Euler_Backward(PhysBall& ball, float dt) {
+
+	ball.x += (ball.vx * dt);
+	ball.y += (ball.vy * dt);
+	ball.vx += (ball.ax * dt);
+	ball.vy += (ball.ay * dt);
+
+}
+
 // Detect collision with ground
 bool is_colliding_with_ground(const PhysBall& ball, const Ground& ground)
 {
@@ -622,6 +664,7 @@ bool is_colliding_with_ground(const PhysBall& ball, const Ground& ground)
 	float rect_y = (ground.y + ground.h / 2.0f); // Center of rectangle
 	return check_collision_circle_rectangle(ball.x, ball.y, ball.radius, rect_x, rect_y, ground.w, ground.h);
 }
+
 
 // Detect collision with water
 bool is_colliding_with_water(const PhysBall& ball, const Water& water)

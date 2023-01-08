@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
 			}
 
 			break;
-
+		
 		case MAIN_UPDATE:
 		{
 			int update_return = App->Update();

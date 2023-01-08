@@ -25,6 +25,7 @@ public:
 	bool win;
 	bool lose;
 	int wintimer;
+	int integrator;
 	int losetimer;
 	int movement;
 	uint loseSFX;
